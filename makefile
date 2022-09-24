@@ -2,7 +2,6 @@ init: ## Start a new develop environment
 	$(MAKE) install
 	$(MAKE) keys
 	$(MAKE) fresh
-	$(MAKE) seed
 
 keys: ## Generate secret keys
 	docker-compose exec cripto-api-nginx bash -c "su -c 'php artisan key:generate' application"
@@ -38,11 +37,11 @@ reapply: ## Reapply the last migrations
 	docker-compose exec cripto-api-nginx php artisan migrate
 
 backup: ## Export database
-	docker-compose exec cripto-api-mysql bash -c "mysqldump -u root -p database > /var/www/app/database/dumps/backup.sql"
-	docker-compose exec cripto-api-mysql bash -c "chown 1000:1000 /var/www/app/database/dumps/backup.sql"
+	docker-compose exec cripto-api-mysql bash -c "mysqldump -u root -p database > /var/www/database/dumps/backup.sql"
+	docker-compose exec cripto-api-mysql bash -c "chown 1000:1000 /var/www/database/dumps/backup.sql"
 
 restore: ## Import database
-	docker-compose exec cripto-api-mysql bash -c "mysql -u root -p database < /var/www/app/database/dumps/backup.sql"
+	docker-compose exec cripto-api-mysql bash -c "mysql -u root -p database < /var/www/database/dumps/backup.sql"
 
 route: ## Rollback migration
 	docker-compose exec cripto-api-nginx php artisan route:list

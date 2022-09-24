@@ -5,12 +5,19 @@ namespace App\Repositories;
 use App\Models\Coin;
 use App\Models\HistoryCoin;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request;
 use Ramsey\Uuid\Uuid;
 
+/**
+ *
+ */
 class HistoryCoinRepository
 {
-    public function save(array $data, $coinId)
+    /**
+     * @param array $data
+     * @param $coinId
+     * @return bool
+     */
+    public function save(array $data, $coinId): bool
     {
         $history = new HistoryCoin;
         $history->id = Uuid::uuid4();
@@ -25,7 +32,7 @@ class HistoryCoinRepository
      * @param $coin
      * @return void
      */
-    public function storeSpecificCoin($coin, $coinId)
+    public function storeSpecificCoin($coin, $coinId): void
     {
         $request = json_decode(Http::get("https://api.coingecko.com/api/v3/coins/{$coin}"));
 
@@ -40,7 +47,10 @@ class HistoryCoinRepository
         $history->save();
     }
 
-    public function loadAllCoins()
+    /**
+     * @return array
+     */
+    public function loadAllCoins(): array
     {
         $coins = Coin::select('id_name')->get()->toArray();
         $result = [];
@@ -51,10 +61,22 @@ class HistoryCoinRepository
         return $result;
     }
 
-    public function loadCoinHistoryForSpecificDate(string $coin, $date)
+    /**
+     * @param string $coin
+     * @param $date
+     * @param $time
+     * @return array
+     */
+    public function loadCoinHistoryForSpecificDate(string $coin, $date, $time = null): array
     {
         $start_date = $date . ' 00:00:00';
-        $end_date = $date .  ' 23:59:59';
+        $end_date = $date . " 23:59:59";
+
+        if (!empty($time)) {
+            $end_date = $date . " $time";
+        }
+
+
         $history = HistoryCoin::query()
             ->where('coin_id', $coin)
             ->whereBetween('created_at', [$start_date, $end_date])
@@ -65,19 +87,22 @@ class HistoryCoinRepository
 
         return [
             'coin' => [
-            'id' => $history->coin->id_name,
-            'name' => $history->coin->name,
-            'symbol' => $history->coin->symbol
+                'id' => $history->coin->id_name,
+                'name' => $history->coin->name,
+                'symbol' => $history->coin->symbol
             ],
             'current_price' => json_decode($history->current_price)
         ];
     }
 
-    public function loadCoinUuid($nameId)
+    /**
+     * @param $nameId
+     * @return array
+     */
+    public function loadCoinUuid($nameId): array
     {
-
         return Coin::query()
-            ->where('id_name',$nameId)
+            ->where('id_name', $nameId)
             ->get()
             ->toArray();
     }

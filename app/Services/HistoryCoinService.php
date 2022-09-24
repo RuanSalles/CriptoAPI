@@ -7,7 +7,6 @@ use App\Models\HistoryCoin;
 use App\Repositories\HistoryCoinRepository;
 use Closure;
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -131,14 +130,13 @@ class HistoryCoinService
     /**
      * @param string $coin
      * @param string $date
+     * @param string|null $time
      * @return ResponseFactory|Response
      */
-    public function loadHistoryForDate(string $coin, string $date): ResponseFactory|Response
+    public function loadHistoryForDate(string $coin, string $date, string $time = null): ResponseFactory|Response
     {
-        $search = $this->loadCoinForUuid($coin);
-
         return jsend_success(
-            $this->historyCoinRepository->loadCoinHistoryForSpecificDate($this->loadCoinForUuid($coin), $date)
+            $this->historyCoinRepository->loadCoinHistoryForSpecificDate($this->loadCoinForUuid($coin), $date, $time)
         );
     }
 }

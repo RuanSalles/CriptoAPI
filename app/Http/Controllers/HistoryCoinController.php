@@ -65,6 +65,7 @@ class HistoryCoinController extends Controller
     public function loadHistoryForDate(string $coin, Request $request): ResponseFactory|Response
     {
         $date = $request->date;
+        $time = $request->time;
 
         $values = array_values($this->historyCoinService->allCoins());
 
@@ -72,7 +73,7 @@ class HistoryCoinController extends Controller
             return jsend_error('invalid value', 400);
         }
 
-        return $this->historyCoinService->loadHistoryForDate($coin, $date);
+        return $this->historyCoinService->loadHistoryForDate($coin, $date, $time);
     }
 
 
