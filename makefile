@@ -48,10 +48,6 @@ route: ## Rollback migration
 	docker-compose exec cripto-api-nginx php artisan route:list
 
 ##@ Composer
-
-install: ## Composer install dependencies
-	docker-compose exec cripto-api-nginx bash -c "su -c \"composer install\" application"
-
 autoload: ## Run the composer dump
 	docker-compose exec cripto-api-nginx bash -c "su -c \"composer dump-autoload\" application"
 ##@ Bash controls

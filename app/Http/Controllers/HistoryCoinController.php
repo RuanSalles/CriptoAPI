@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreHistoryCoinRequest;
-use App\Models\HistoryCoin;
 use App\Services\HistoryCoinService;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  *
@@ -29,13 +28,13 @@ class HistoryCoinController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
+     * @return Response|ResponseFactory
      */
-    public function index(): JsonResponse
+    public function index(): ResponseFactory|Response
     {
         $payload = $this->historyCoinService->loadCoin();
 
-        return response()->json([
+        return jsend_success([
             'coin' => [
                 'id' => $payload->coin->id_name,
                 'name' => $payload->coin->name,
@@ -46,42 +45,33 @@ class HistoryCoinController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param StoreHistoryCoinRequest $request
-     * @return bool
      */
-    public function store(StoreHistoryCoinRequest $request): bool
-    {
-    }
-
-    /**
-     */
-    public function findSpecificCoin($coinId)
+    public function findSpecificCoin($coinId): Response|ResponseFactory
     {
         $values = array_values($this->historyCoinService->allCoins());
 
         if (!in_array($coinId, $values)) {
-            return response()->json('invalid value', 400);
+            return jsend_error('invalid value', 400);
         }
 
         return $this->historyCoinService->coin($coinId);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param \App\Models\HistoryCoin $historyCoin
-     * @return \Illuminate\Http\Response
+     * @param string $coin
+     * @param Request $request
+     * @return ResponseFactory|Response
      */
-    public function show(HistoryCoin $historyCoin)
-    {
-        //
-    }
-
-    public function loadHistoryForDate(string $coin, Request $request): JsonResponse
+    public function loadHistoryForDate(string $coin, Request $request): ResponseFactory|Response
     {
         $date = $request->date;
+
+        $values = array_values($this->historyCoinService->allCoins());
+
+        if (!in_array($coin, $values)) {
+            return jsend_error('invalid value', 400);
+        }
+
         return $this->historyCoinService->loadHistoryForDate($coin, $date);
     }
 

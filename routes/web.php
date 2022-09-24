@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::get('/', function () {
-//    return response()->json(["message" => "Cheguei aqui"]);
+//
 //});
 
 Route::fallback(function () {
-    return response()->json(["message" => "Not Found"], 404);
+    return jsend_error(["message" => "Not Found"], 404);
 });

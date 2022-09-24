@@ -6,7 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCoinRequest;
 use App\Models\Coin;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  *
@@ -26,20 +28,11 @@ class CoinController extends Controller
         $this->coin = $coin;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * @return JsonResponse
+     * @return ResponseFactory|Response
      */
-    public function list(): JsonResponse
+    public function list(): ResponseFactory|Response
     {
         $result = Coin::all()->map(function ($result) {
             return [
@@ -49,18 +42,7 @@ class CoinController extends Controller
             ];
         });
 
-        return response()->json($result);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCoinRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCoinRequest $request)
-    {
-        //
+        return jsend_success($result);
     }
 
 }

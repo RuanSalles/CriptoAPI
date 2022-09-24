@@ -26,7 +26,6 @@ class StoreAllCoins extends Command
 
     public function handle()
     {
-        $historyStore = app('App\Services\HistoryCoinService')->storeAllCoins();
-        return $historyStore;
+        app('App\Services\HistoryCoinService')->storeAllCoins();
     }
 }

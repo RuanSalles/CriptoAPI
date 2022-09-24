@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('coins:storeAll')->everyMinute()->sendOutputTo('/home/salescodes/vhost/Teste/CriptoAPI/log.txt');
+        $schedule->command('coins:storeAll')->everyMinute()->sendOutputTo('/var/www/log.txt');
     }
 
     /**

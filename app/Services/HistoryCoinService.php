@@ -5,8 +5,11 @@ namespace App\Services;
 use App\Models\Coin;
 use App\Models\HistoryCoin;
 use App\Repositories\HistoryCoinRepository;
+use Closure;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  *
@@ -41,9 +44,9 @@ class HistoryCoinService
     }
 
     /**
-     * @return \Closure|mixed|null
+     * @return Closure|mixed|null
      */
-    public function loadCoin()
+    public function loadCoin(): mixed
     {
         return $this->historyCoin->historyList();
     }
@@ -88,16 +91,23 @@ class HistoryCoinService
         return $this->historyCoinRepository->save($data, $coinId);
     }
 
-    public function allCoins()
+    /**
+     * @return array
+     */
+    public function allCoins(): array
     {
         return $this->historyCoinRepository->loadAllCoins();
     }
 
-    public function coin(string $coin): JsonResponse
+    /**
+     * @param string $coin
+     * @return ResponseFactory|Response
+     */
+    public function coin(string $coin): ResponseFactory|Response
     {
         $request = json_decode(Http::get("https://api.coingecko.com/api/v3/coins/{$coin}"));
 
-        return response()->json([
+        return jsend_success([
             "coin_data" => [
                 'id' => $request->id,
                 'name' => $request->name,
@@ -108,17 +118,27 @@ class HistoryCoinService
     }
 
 
-    public function loadCoinForUuid($idName)
+    /**
+     * @param $idName
+     * @return mixed
+     */
+    public function loadCoinForUuid($idName): mixed
     {
         $search = $this->historyCoinRepository->loadCoinUuid($idName);
         return $search[0]['id'];
-
     }
 
-    public function loadHistoryForDate(string $coin, string $date): JsonResponse
+    /**
+     * @param string $coin
+     * @param string $date
+     * @return ResponseFactory|Response
+     */
+    public function loadHistoryForDate(string $coin, string $date): ResponseFactory|Response
     {
         $search = $this->loadCoinForUuid($coin);
 
-        return response()->json($this->historyCoinRepository->loadCoinHistoryForSpecificDate($this->loadCoinForUuid($coin),$date));
+        return jsend_success(
+            $this->historyCoinRepository->loadCoinHistoryForSpecificDate($this->loadCoinForUuid($coin), $date)
+        );
     }
 }

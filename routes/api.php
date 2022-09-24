@@ -23,8 +23,5 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('coins')->group(function () {
     Route::get('/list', [CoinController::class, 'list']);
     Route::get('/{nameId}', [HistoryCoinController::class, 'findSpecificCoin']);
-    Route::post('/store', [HistoryCoinController::class, 'store']);
-    Route::get('/historyList', [HistoryCoinController::class, 'index']);
-    Route::get('/storeAll', [HistoryCoinController::class, 'storeAllCoins']);
     Route::get('/history/{coin}', [HistoryCoinController::class, 'loadHistoryForDate']);
 });

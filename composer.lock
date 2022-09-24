@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccbd816a07b206f971042295b899d1ba",
+    "content-hash": "d7a1012a1a652cf5e0233eca44edb4c3",
     "packages": [
         {
             "name": "brick/math",
@@ -2836,6 +2836,60 @@
                 }
             ],
             "time": "2022-09-16T03:22:46+00:00"
+        },
+        {
+            "name": "shalvah/laravel-jsend",
+            "version": "2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shalvah/laravel-jsend.git",
+                "reference": "11e6d0968a86a3a3744e7e58b53f8a490f067397"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shalvah/laravel-jsend/zipball/11e6d0968a86a3a3744e7e58b53f8a490f067397",
+                "reference": "11e6d0968a86a3a3744e7e58b53f8a490f067397",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.0|^8.0|^9.0",
+                "php": ">=7.2.5"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Shalvah\\LaravelJsend\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Shalvah Adebayo",
+                    "email": "shalvah.adebayo@gmail.com"
+                }
+            ],
+            "description": "Laravel helpers to easily send JSend-compliant responses",
+            "homepage": "http://shalvah.me/laravel-jsend",
+            "keywords": [
+                "jsend",
+                "json",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/shalvah/laravel-jsend/issues",
+                "source": "https://github.com/shalvah/laravel-jsend"
+            },
+            "time": "2022-03-22T18:20:33+00:00"
         },
         {
             "name": "symfony/console",

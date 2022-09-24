@@ -4,6 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ *
+ */
 class StoreHistoryCoinRequest extends FormRequest
 {
     /**
@@ -19,13 +22,10 @@ class StoreHistoryCoinRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return void
      */
     public function rules()
     {
-        return [
-            'coin_id' => 'UUID',
-            'current_price' => 'json'
-        ];
+    //
     }
 }
