@@ -2,6 +2,7 @@ init: ## Start a new develop environment
 	$(MAKE) install
 	$(MAKE) keys
 	$(MAKE) fresh
+	$(MAKE) seed
 
 keys: ## Generate secret keys
 	docker-compose exec cripto-api-nginx bash -c "su -c 'php artisan key:generate' application"
@@ -16,6 +17,9 @@ migration: ## Create migration file
 
 migrate: ## Perform migrations
 	docker-compose exec cripto-api-nginx php artisan migrate
+
+storeall: ## Perform migrations
+	docker-compose exec cripto-api-nginx php artisan coins:storeAll
 
 horizon: ## Start laravel horizon
 	docker-compose exec -u application cripto-api-nginx php artisan horizon
@@ -40,6 +44,8 @@ backup: ## Export database
 restore: ## Import database
 	docker-compose exec cripto-api-mysql bash -c "mysql -u root -p database < /var/www/app/database/dumps/backup.sql"
 
+route: ## Rollback migration
+	docker-compose exec cripto-api-nginx php artisan route:list
 
 ##@ Composer
 

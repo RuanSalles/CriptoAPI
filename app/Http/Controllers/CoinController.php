@@ -1,13 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCoinRequest;
-use App\Http\Requests\UpdateCoinRequest;
 use App\Models\Coin;
+use Illuminate\Http\JsonResponse;
 
+/**
+ *
+ */
 class CoinController extends Controller
 {
+    /**
+     * @var Coin
+     */
+    protected Coin $coin;
+
+    /**
+     * @param Coin $coin
+     */
+    public function __construct(Coin $coin)
+    {
+        $this->coin = $coin;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,13 +37,19 @@ class CoinController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function create()
+    public function list(): JsonResponse
     {
-        //
+        $result = Coin::all()->map(function ($result) {
+            return [
+                'id_name' => $result->id_name,
+                'name' => $result->name,
+                'symbol' => $result->symbol
+            ];
+        });
+
+        return response()->json($result);
     }
 
     /**
@@ -39,48 +63,4 @@ class CoinController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Coin  $coin
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Coin $coin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Coin  $coin
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Coin $coin)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCoinRequest  $request
-     * @param  \App\Models\Coin  $coin
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCoinRequest $request, Coin $coin)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Coin  $coin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Coin $coin)
-    {
-        //
-    }
 }
