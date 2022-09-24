@@ -22,6 +22,7 @@ services:
     working_dir: /var/www
     volumes:
       - .:/var/www
+      - .docker/opt/docker/etc/supervisor.d/php-fpm.conf:/opt/docker/etc/supervisor.d/php-fpm.conf
     ports:
       - "8080:80"
     environment:
