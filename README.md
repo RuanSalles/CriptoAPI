@@ -52,17 +52,17 @@ cd CriptoApi
 
 Then copy the docker-compose and env files to properly configure the environment variables and docker containers needed to run the application.
 ~~~bash
-# Copia do docker-compose do projeto
+# Copy of project docker-compose
 cp docker-compose.example.yml docker-compose.yml
 
-#Copia do .env do projeto com as configurações de variáveis de ambiente
+# Copy project .env with environment variable settings
 cp .env.example .env
 ~~~
 
 Posterior ha copia dos arquivos acima, poderá iniciar o projeto com o comando:
 
 ~~~bash
-#Iniciando Docker
+# Starting Docker
 docker-compose up -d
 ~~~
 
@@ -81,9 +81,9 @@ After finishing the process of the command above, you can now access the browser
 http://localhost:8080
 ~~~
 
-### Rotas
+### Routes
 
-A seguir iremos listar os endpoints e suas respectivas rotas:
+Below we will list the endpoints and their respective routes:
 
 #### 1. Coin listing
 Listing of all coins that are tracked by CriptoApi:
