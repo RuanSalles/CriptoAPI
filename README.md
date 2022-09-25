@@ -30,6 +30,19 @@ The technologies that make up the CryptoAPI are:
 + Docker
 + Laravel
 
+## Requisitos avaliativos do teste
+
+Activities | Delivered
+-------------------------------------------- | --------------------------------------------
+**Required** - Create the API using Laravel | ✅
+**Required** - Use the CoinGecko API and store the price of Bitcoin into the database | ✅
+**Required** - Host the application on your preferred hosting service | ✅
+**Bonus** - Following coin prices: DACXI, ETH, ATOM | ✅
+**Bonus** - Automated Tests | ❌
+**Bonus** - Docker Orchestration | ✅
+
+Bonus: Endpoint creation that accepts the search by date and time, making the search return more accurate.
+
 ## Installing the Project
 
 To start installing the project, execute the clone with the command:
@@ -59,14 +72,14 @@ cp docker-compose.example.yml docker-compose.yml
 cp .env.example .env
 ~~~
 
-Posterior ha copia dos arquivos acima, poderá iniciar o projeto com o comando:
+After copying the files above, you can start the project with the command:
 
 ~~~bash
 # Starting Docker
 docker-compose up -d
 ~~~
 
-After copying the files above, you can start the project with the command:
+After downloading, creating and having all the containers standing, you can use the command below to install all the dependencies.
 
 ~~~bash
 make init
