@@ -227,7 +227,8 @@ Return example:
 
 You will be able to check the exact value of specific coins based on the date and time of your choice:
 
->The application contains an automated routine that populates the database with the current values ​​of the currencies contained in the database, which can be seen in the list route mentioned above. However, for a better experience and more accurate queries in a local environment, you should wait some time for the database to be automatically populated.
+> >The application contains an automated routine that fills the database with the current values of the currencies contained in the database, which can be seen in the above mentioned route list.
+
 
 ~~~text
 /api/coins/history/{coin}?date=xxxx-xx-xx&time=xx:xx:xx
