@@ -60,7 +60,7 @@ class HistoryCoinController extends Controller
     /**
      * @param string $coin
      * @param Request $request
-     * @return ResponseFactory|Response
+     * @return Response|ResponseFactory
      */
     public function loadHistoryForDate(string $coin, Request $request): ResponseFactory|Response
     {
@@ -73,7 +73,13 @@ class HistoryCoinController extends Controller
             return jsend_error('invalid value', 400);
         }
 
-        return $this->historyCoinService->loadHistoryForDate($coin, $date, $time);
+        $historyDataBase = $this->historyCoinService->loadHistoryForDate($coin, $date, $time);
+
+        if (empty($historyDataBase)) {
+            return jsend_success($this->historyCoinService->loadHistoryToAPI($coin, $date));
+        }
+
+        return jsend_success($historyDataBase);
     }
 
 

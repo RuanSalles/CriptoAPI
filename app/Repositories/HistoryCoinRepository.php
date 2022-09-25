@@ -65,9 +65,9 @@ class HistoryCoinRepository
      * @param string $coin
      * @param $date
      * @param $time
-     * @return array
+     * @return array|null
      */
-    public function loadCoinHistoryForSpecificDate(string $coin, $date, $time = null): array
+    public function loadCoinHistoryForSpecificDate(string $coin, $date, $time = null): ?array
     {
         $start_date = $date . ' 00:00:00';
         $end_date = $date . " 23:59:59";
@@ -84,15 +84,18 @@ class HistoryCoinRepository
             ->get()
             ->last();
 
+        if (!empty($history)) {
+            return [
+                'coin' => [
+                    'id' => $history->coin->id_name,
+                    'name' => $history->coin->name,
+                    'symbol' => $history->coin->symbol
+                ],
+                'current_price' => json_decode($history->current_price)
+            ];
+        }
 
-        return [
-            'coin' => [
-                'id' => $history->coin->id_name,
-                'name' => $history->coin->name,
-                'symbol' => $history->coin->symbol
-            ],
-            'current_price' => json_decode($history->current_price)
-        ];
+        return null;
     }
 
     /**

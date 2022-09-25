@@ -131,12 +131,31 @@ class HistoryCoinService
      * @param string $coin
      * @param string $date
      * @param string|null $time
-     * @return ResponseFactory|Response
+     * @return array|null
      */
-    public function loadHistoryForDate(string $coin, string $date, string $time = null): ResponseFactory|Response
+    public function loadHistoryForDate(string $coin, string $date, string $time = null): ?array
     {
-        return jsend_success(
-            $this->historyCoinRepository->loadCoinHistoryForSpecificDate($this->loadCoinForUuid($coin), $date, $time)
-        );
+        return $this->historyCoinRepository->loadCoinHistoryForSpecificDate($this->loadCoinForUuid($coin), $date, $time);
+    }
+
+    /**
+     * @param $coin
+     * @param $date
+     * @return array
+     */
+    public function loadHistoryToAPI($coin, $date): array
+    {
+        $dateString = strtotime($date);
+        $formatDate = date('d-m-Y', $dateString);
+        $request = json_decode(Http::get("https://api.coingecko.com/api/v3/coins/{$coin}/history?date={$formatDate}"));
+
+        return [
+            "coin_data" => [
+                'id' => $request->id,
+                'name' => $request->name,
+                'symbol' => $request->symbol
+            ],
+            "current_price" => $request->market_data->current_price
+        ];
     }
 }
