@@ -2,6 +2,7 @@ init: ## Start a new develop environment
 	$(MAKE) install
 	$(MAKE) keys
 	$(MAKE) fresh
+	$(MAKE) seed
 
 keys: ## Generate secret keys
 	docker-compose exec cripto-api-nginx bash -c "su -c 'php artisan key:generate' application"

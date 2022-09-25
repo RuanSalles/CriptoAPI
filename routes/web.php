@@ -13,9 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//
-//});
+
+Route::get('/', function () {
+return redirect('/api/coins/bitcoin');
+});
 
 Route::fallback(function () {
     return jsend_error(["message" => "Not Found"], 404);

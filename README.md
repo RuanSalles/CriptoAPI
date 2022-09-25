@@ -11,30 +11,31 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-## Sobre
+## About
 
-A CriptoAPI é um projeto que facilita a visualização de parametrização dos valores de cripto moedas, dando ao usuário a chance de busca por valores atuais (tempo real) ou buscando um histórico de preços de moedas específicas.
+CriptoAPI is a project that facilitates the visualization of the parameterization of cryptocurrency values, giving the user the chance to search for current values ​​(real time) or searching a price history of specific currencies.
 
-Atualmente a CriptoAPI realiza o rastreamento das seguintes moedas, preços atuais e com possibilidade de verificar preços por data:
+Currently, CriptoAPI tracks the following currencies, current prices and the possibility of checking prices by date:
 
 + Bitcoin
 + Dacxi
 + Ethereum
 + ATOM
 
-## Tecnologias Utilizadas
-As tecnologias que compoem a CriptoAPI são:
+## Technologies Used
+The technologies that make up the CryptoAPI are:
 
 + PHP 8
 + MySQL
 + Docker
 + Laravel
 
-## Instalando o Projeto
+## Installing the Project
 
-Para iniciar a instalação do projeto realize o clone com o comando:
+To start installing the project, execute the clone with the command:
 
-> Escolha a forma mais conveniente de clone por HTTPS ou SSH
+> Choose the most convenient way to clone via HTTPS or SSH
+
 ~~~bash
 # SSH Clone
 git clone git@github.com:RuanSalles/CriptoAPI.git
@@ -43,14 +44,13 @@ git clone git@github.com:RuanSalles/CriptoAPI.git
 git clone https://github.com/RuanSalles/CriptoAPI.git
 ~~~
 
-Acesse a pasta do projeto:
+Access the project folder:
 
 ~~~bash
 cd CriptoApi
 ~~~
 
-Em seguida copie os arquivos docker-compose e env para realizar a devida configurações das variáveis de ambiente e containers docker necessários para executar a aplicação.
-
+Then copy the docker-compose and env files to properly configure the environment variables and docker containers needed to run the application.
 ~~~bash
 # Copia do docker-compose do projeto
 cp docker-compose.example.yml docker-compose.yml
@@ -66,13 +66,16 @@ Posterior ha copia dos arquivos acima, poderá iniciar o projeto com o comando:
 docker-compose up -d
 ~~~
 
-Facilitando para build do projeto, há implementação de arquivo makefile, que executará comandos diretamente nos containers realizando a instalação do composer, migrations entre outros, então execute:
+After copying the files above, you can start the project with the command:
+
 ~~~bash
 make init
 ~~~
->Qualquer dúvida na raiz do projeto poderá encontrar o makefile e verificar as opções disponíveis.
+>If you have any doubts at the project root, you can find the makefile and check the available options.
 
-Após finalização do processo do comando acima, já poderá acessar o navegador no localhost para executar a aplicação:
+>The application automatically runs the searches that populate the database to create a history of the coins, as soon as the project starts, this process will start in the background in a transparent way, so that the time and date functionality can be used must be used in UTC format **(yyyy-mm-dd)**, if you search by time you must use the standard format **(hour:minute:seconds)**.
+
+After finishing the process of the command above, you can now access the browser on localhost to run the application:
 
 ~~~text
 http://localhost:8080
@@ -82,15 +85,13 @@ http://localhost:8080
 
 A seguir iremos listar os endpoints e suas respectivas rotas:
 
-> Todas as rotas da CriptoApi contém o prefixo **coins** então atende-se no padrão de utilização:
-
-#### 1. Listagem de moedas
-Listagem de todas as moedas que são rastreadas pela CriptoApi:
+#### 1. Coin listing
+Listing of all coins that are tracked by CriptoApi:
 ~~~text
 /api/coins/list
 ~~~
 
-Exemplo de retorno:
+Return example:
 
 ~~~json
 /* url: /api/coins/list */
@@ -122,15 +123,15 @@ Exemplo de retorno:
 }
 ~~~
 
-#### 2. Pesquisa por Moeda
+#### 2. Search by Currency
 
-Você poderá pesquisar através deste endpoint usando qualquer dos **ids** existentes no payload do entpoint acima:
+You can search through this endpoint using any of the **ids** in the entpoint payload above:
 
 ~~~text
 /api/coins/{coin}
 ~~~
 
-Exemplo de retorno:
+Return example:
 
 ~~~json
 /* url: /api/coins/bitcoin */
@@ -209,16 +210,18 @@ Exemplo de retorno:
 }
 ~~~
 
-#### 3. Histórico de Cotações
+#### 3. Quote History
 
-Você poderá verificar o valor exato de moedas específicas baseado na data e hora de sua escolha:
+You will be able to check the exact value of specific coins based on the date and time of your choice:
+
+>The application contains an automated routine that populates the database with the current values ​​of the currencies contained in the database, which can be seen in the list route mentioned above. However, for a better experience and more accurate queries in a local environment, you should wait some time for the database to be automatically populated.
 
 ~~~text
 /api/coins/history/{coin}?date=xxxx-xx-xx&time=xx:xx:xx
 ~~~
->Os parâmetros **coin e date** são obrigatórios, enquanto o **time** é opcional
+>The **coin and date** parameters are required, while the **time** is optional
 
-Exemplo de retorno:
+Return example:
 
 ~~~json
 /* url: /api/coins/history/ethereum?date=2022-09-24&time=20:32:00 */
@@ -298,5 +301,8 @@ Exemplo de retorno:
 }
 ~~~
 
+## License
 
+This project is under the MIT license.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
