@@ -30,7 +30,7 @@ The technologies that make up the CryptoAPI are:
 + Docker
 + Laravel
 
-## Requisitos avaliativos do teste
+## Test evaluative requirements
 
 Activities | Delivered
 -------------------------------------------- | --------------------------------------------
