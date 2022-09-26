@@ -98,7 +98,7 @@ After downloading, creating and having all the containers standing, you can use 
 ~~~bash
 make init
 ~~~
->If you have any doubts at the project root, you can find the makefile and check the available options.
+>If you have any question at the project root, you can find the makefile and check the available options.
 
 >The application automatically runs the searches that populate the database to create a history of the coins, as soon as the project starts, this process will start in the background in a transparent way, so that the time and date functionality can be used must be used in UTC format **(yyyy-mm-dd)**, if you search by time you must use the standard format **(hour:minute:seconds)**.
 
