@@ -47,7 +47,7 @@ Bonus: Endpoint creation that accepts the search by date and time, making the se
 
 The docker environment was chosen to create the project, with the WebDevops Ngnix 8.0 image, bringing all the features and benefits of version 8 of PHP to the project. Consequently, MySQL version 5.7 was chosen for the database, also with docker/container image, all project dependencies are properly configured through the docker-compose.yml file.
 
-With regard to project choices, Repository patterns are used for all actions related to the database, as well as the Pattern Service to communicate the actions requested by the Controller, handled by the service and returned by the Repository in order to respect good programming practices and clean code.
+Regarding to the project choices, Repository patterns are used for all actions related to the database, as well as the Pattern Service to communicate the actions requested by the Controller, handled by the service and returned by the Repository in order to respect good programming practices and clean code.
 
 In order for the database to be properly populated with the history, a routine was implemented through Command and Schedule, so that with the PHP-FPM Supervisor itself, it is possible to run a command that performs the search for all the currencies existing in the database. data and later populate the database. This entire process runs automatically when the docker containers are raised at an interval of 1 (one) minute.
 
