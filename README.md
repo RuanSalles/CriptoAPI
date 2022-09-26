@@ -40,8 +40,7 @@ Activities | Delivered
 **Bonus** - Following coin prices: DACXI, ETH, ATOM | ✅
 **Bonus** - Automated Tests | ❌
 **Bonus** - Docker Orchestration | ✅
-
-Bonus: Endpoint creation that accepts the search by date and time, making the search return more accurate.
+**Bonus** - Endpoint creation that accepts the search by date and time | ✅
 
 ## Summary about the application
 
