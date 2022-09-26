@@ -43,6 +43,20 @@ Activities | Delivered
 
 Bonus: Endpoint creation that accepts the search by date and time, making the search return more accurate.
 
+## Summary about the application
+
+The docker environment was chosen to create the project, with the WebDevops Ngnix 8.0 image, bringing all the features and benefits of version 8 of PHP to the project. Consequently, MySQL version 5.7 was chosen for the database, also with docker/container image, all project dependencies are properly configured through the docker-compose.yml file.
+
+With regard to project choices, Repository patterns are used for all actions related to the database, as well as the Pattern Service to communicate the actions requested by the Controller, handled by the service and returned by the Repository in order to respect good programming practices and clean code.
+
+In order for the database to be properly populated with the history, a routine was implemented through Command and Schedule, so that with the PHP-FPM Supervisor itself, it is possible to run a command that performs the search for all the currencies existing in the database. data and later populate the database. This entire process runs automatically when the docker containers are raised at an interval of 1 (one) minute.
+
+The Deployment of the project was carried out on a Digital Ocean VPS, thinking about better performance and compatibility with the Docker environment, making the application more robust and thinking about its scalability.
+
+The CriptoAPI contains Endpoints that currently allow: List the currencies that can be searched, search the current value of a specific currency, search for the history of the currency value by date and time, in addition to an automated and transparent routine to populate the bank at an interval of 1 (one) minute with the history of all coins in the database.
+
+Any and all questions about the application or requirements can be removed by sending an email to the address: contatoruansales@gmail.com
+
 ## Installing the Project
 
 To start installing the project, execute the clone with the command:
